@@ -1,71 +1,62 @@
 ﻿using API_INTRO.Models;
+using API_INTRO.Interfaces;
 
 namespace API_INTRO.Repositories
 {
-    public class PizzaRepository : IPizzaRepostitory
+    public class PizzaRepository : IPizzaRepository
     {
+
+        //this List is replacing our DB for now
         private static List<Pizza> _pizzaData = new()
-        {
+    {
             new Pizza()
             {
                 Id = 1,
                 CrustType = "thick",
                 Extras = "",
-                Size = "Large",
-                Toppings = new() { "perreroni", "mushrooms"
+                Size = "large",
+                Toppings = new() { "pepperoni", "mushroom"
                 }
             },
             new Pizza()
             {
-                Id=2,
+                Id = 2,
                 CrustType = "thin",
-                Extras = "red pepper flakes",
-                Size = "Small",
-                Toppings = new() { "perreroni", "sausage"
-                }
+                Extras = "red pepper flakes and spicy tomato sauce",
+                Size = "large",
+                Toppings = new() { "salami", "roasted red peppers", "spinach"}
             },
             new Pizza()
             {
                 Id=3,
-                CrustType = "hand tossed",
-                Extras = "cheese",
-                Size = "Medium",
-                Toppings = new() { "cheese"
-                }
+                CrustType = "pan",
+                Extras = "toy",
+                Size = "small",
+                Toppings = new() { "cheese" }
             },
-            new Pizza()
-            {   
-                Id=4,
-                CrustType = "extra thick",
-                Extras = "",
-                Size = "Large",
-                Toppings = new() { "perreroni", "mushrooms"
-                }
-            },
-    };
+};
+
+        public Pizza GetById(int id)
+        {
+            return _pizzaData.FirstOrDefault(p => p.Id == id);
+        }
 
         public List<Pizza> GetAll()
         {
             return _pizzaData;
         }
 
-        internal List<Pizza> GetAll()
+        public bool Create(Pizza value)
         {
-            var retVal = new List<Pizza>();
-
-            return retVal;
+            _pizzaData.Add(value);
+            return true;
         }
 
-        public void Create()
+        public void Delete(int id)
         {
-            _pizzaData.Add(new Pizza()
-            {
-                CrustType = "thick",
-                Extras = "",
-                Size = "Large",
-                Toppings = new() { "perreroni", "mushrooms"
-                }
-            });
+            Pizza pizzaToDelete = _pizzaData.FirstOrDefault(p => p.Id == id);
+            _pizzaData.Remove(pizzaToDelete);
         }
     }
 }
+

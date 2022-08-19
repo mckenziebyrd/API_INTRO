@@ -1,7 +1,12 @@
-﻿namespace API_INTRO.Interfaces
+﻿using API_INTRO.Models;
+
+namespace API_INTRO.Interfaces
 {
     public interface IPizzaRepository
     {
-        IPizzaRepository GetById
+        Pizza GetById(int id);
+        List<Pizza> GetAll();
+        bool Create(Pizza pizza);
+        void Delete(int id);
     }
 }

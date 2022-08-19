@@ -1,5 +1,7 @@
 ﻿namespace API_INTRO.Models
 {
+    //Models are classes that represent things
+    //in your application/domain (domain = real-world business words)
     public class Pizza
     {
         public int Id { get; set; }
